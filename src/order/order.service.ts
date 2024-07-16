@@ -1,16 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { Prisma, Order } from '@prisma/client';
+import { Order } from '@prisma/client';
+import { CreateOrderDto } from './dto/create-order-dto';
 
 @Injectable()
 export class OrderService {
   constructor(private prisma: PrismaService) {}
 
-  async getOrders() {
+  async getOrders(): Promise<Order[]> {
     return this.prisma.order.findMany();
   }
 
-  async createOrder(data: Prisma.OrderCreateInput){
-    return this.prisma.order.create({ data });
+  async createOrder(createOrderDto: CreateOrderDto): Promise<Order> {
+    return this.prisma.order.create({
+      data: createOrderDto,
+    });
   }
 }
