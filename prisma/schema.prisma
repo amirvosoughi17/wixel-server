@@ -18,6 +18,12 @@ model Order {
   likedWebsiteUrls  String[]
 }
 
+model Admin {
+  id       Int    @id @default(autoincrement())
+  username String @unique
+  password String
+}
+
 enum WebType {
   ecommerce
   learning

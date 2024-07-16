@@ -1,21 +1,30 @@
-import { Controller, Get, Post, Body, Param, Patch, Delete, Query, ParseIntPipe, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Req, UnauthorizedException } from '@nestjs/common';
+import { Request } from 'express';
 import { OrderService } from './order.service';
-import { CreateOrderDto } from './dto/create-order-dto';
-import { Order } from '@prisma/client';
+import { AdminService } from '../admin/admin.service';
 
 @Controller('orders')
 export class OrderController {
-  constructor(private readonly orderService: OrderService) {}
+  constructor(
+    private readonly orderService: OrderService,
+    private readonly adminService: AdminService,
+  ) {}
 
   @Get()
-  findAll() {
-    return this.orderService.getOrders();
+  async findAll(@Req() req: Request) {
+    const token = req.cookies?.auth_token; 
+    if (!token || !this.adminService.isAdminUser(token)) {
+      throw new UnauthorizedException('وارد حساب کاربری خود شوید');
+    }
+    return this.orderService.getOrders(token);
   }
 
   @Post()
-  @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
-  create(@Body() createOrderDto: CreateOrderDto) {
+  async create(@Body() createOrderDto: any, @Req() req: Request) {
+    const token = req.cookies?.auth_token; 
+    if (!token || !this.adminService.isAdminUser(token)) {
+      throw new UnauthorizedException('وارد حساب کاربری خود شوید');
+    }
     return this.orderService.createOrder(createOrderDto);
   }
-
 }
