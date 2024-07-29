@@ -20,6 +20,7 @@ model Order {
   updatedAt         DateTime   @updatedAt
 }
 
+
 model Blog {
   id          Int      @id @default(autoincrement())
   title       String
