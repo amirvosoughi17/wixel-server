@@ -16,12 +16,38 @@ model Order {
   typeOfWeb         WebType
   monthlyUsersCount UsersCount
   likedWebsiteUrls  String[]
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+}
+
+model Blog {
+  id          Int      @id @default(autoincrement())
+  title       String
+  bio         String
+  badge       String
+  description String
+  imageUrl    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Admin {
   id       Int    @id @default(autoincrement())
   username String @unique
   password String
+}
+
+model Showcase {
+  id            Int      @id @default(autoincrement())
+  title         String
+  description   String
+  teches        String[]
+  image         String
+  category      String
+  instagramHref String
+  webHref       String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 enum WebType {

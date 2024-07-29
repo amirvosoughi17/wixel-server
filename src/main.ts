@@ -15,8 +15,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const corsOptions: CorsOptions = {
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000', 
-    methods: 'GET,PUT,PATCH,POST,DELETE',
+    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    methods: 'GET,PUT,PATCH,POST,DELETE,',
     credentials: true,
   };
 
@@ -26,10 +26,7 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
       transform: true,
       exceptionFactory: (validationErrors: ValidationError[] = []) => {
-        const errors = validationErrors.map((error) => ({
-          property: error.property,
-          constraints: error.constraints,
-        }));
+        const errors = validationErrors.map((error) => `${error.property}: ${Object.values(error.constraints).join(', ')}`);
         return new BadRequestException(errors);
       },
     }),
