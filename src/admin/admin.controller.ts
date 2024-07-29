@@ -12,9 +12,7 @@ import { AdminLoginDto } from './dto/admin.dto';
 
 @Controller('admin')
 export class AdminController {
-  constructor(
-    private readonly adminService: AdminService
-  ) {}
+  constructor(private readonly adminService: AdminService) {}
 
   @Post('login')
   async login(
@@ -32,6 +30,5 @@ export class AdminController {
       maxAge: 3 * 24 * 60 * 60 * 1000,
     });
     res.send({ message: 'Login successful' });
-
   }
 }

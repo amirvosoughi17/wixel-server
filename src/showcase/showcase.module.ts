@@ -5,7 +5,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { AdminService } from 'src/admin/admin.service';
 
 @Module({
-  providers: [ShowcaseService , PrismaService , AdminService],
-  controllers: [ShowcaseController]
+  providers: [ShowcaseService, PrismaService, AdminService],
+  controllers: [ShowcaseController],
 })
 export class ShowcaseModule {}

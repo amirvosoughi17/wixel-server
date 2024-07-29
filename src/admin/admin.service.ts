@@ -6,7 +6,10 @@ export class AdminService {
   private adminPassword: string = process.env.ADMIN_PASSWORD;
   private validToken: string = process.env.VALID_TOKEN;
 
-  async validateAdmin(credentials: { username: string; password: string }): Promise<boolean> {
+  async validateAdmin(credentials: {
+    username: string;
+    password: string;
+  }): Promise<boolean> {
     const { username, password } = credentials;
     return username === this.adminUsername && password === this.adminPassword;
   }
@@ -19,4 +22,3 @@ export class AdminService {
     return token === this.validToken;
   }
 }
-

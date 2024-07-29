@@ -18,6 +18,7 @@ export class OrderService {
   async createOrder(createOrderDto: CreateOrderDto): Promise<Order> {
     return this.prisma.order.create({ data: createOrderDto });
   }
+
   async deleteOrder(id: number, token: string): Promise<Order> {
     if (token) {
       return this.prisma.order.delete({ where: { id } });

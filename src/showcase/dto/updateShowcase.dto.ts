@@ -1,4 +1,10 @@
-import { IsOptional, IsString, IsArray, IsUrl, IsNotEmpty } from 'class-validator';
+import {
+  IsOptional,
+  IsString,
+  IsArray,
+  IsUrl,
+  IsNotEmpty,
+} from 'class-validator';
 
 export class UpdateShowcaseDto {
   @IsOptional()
