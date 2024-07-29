@@ -7,19 +7,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Order {
-  id                Int        @id @default(autoincrement())
-  name              String
-  phoneNumber       String
-  companyName       String
-  description       String
-  typeOfWeb         WebType
-  monthlyUsersCount UsersCount
-  likedWebsiteUrls  String[]
-  createdAt         DateTime   @default(now())
-  updatedAt         DateTime   @updatedAt
+
+enum WebType {
+  ecommerce
+  learning
+  company
+  personal
+  startup
 }
 
+enum UsersCount {
+  TEN
+  FIFTY
+  FIVE_HUNDRED
+  ONE_THOUSAND
+}
 
 model Blog {
   id          Int      @id @default(autoincrement())
@@ -49,19 +51,4 @@ model Showcase {
   webHref       String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
-}
-
-enum WebType {
-  ecommerce
-  learning
-  company
-  personal
-  startup
-}
-
-enum UsersCount {
-  TEN
-  FIFTY
-  FIVE_HUNDRED
-  ONE_THOUSAND
 }
