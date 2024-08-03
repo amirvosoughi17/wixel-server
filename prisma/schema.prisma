@@ -7,7 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 enum WebType {
   ecommerce
   learning
@@ -51,4 +50,16 @@ model Showcase {
   webHref       String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+}
+
+model Order {
+  id                Int      @id @default(autoincrement())
+  name              String
+  phoneNumber       String
+  companyName       String
+  description       String
+  typeOfWeb         String
+  monthlyUsersCount String
+  likedWebsiteUrls  String[]
+  createdAt         DateTime @default(now())
 }
