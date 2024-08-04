@@ -2,5 +2,5 @@
     "platform": "node",
     "port": 4000,
     "app": "wixel-server"
-  }
+}
   
