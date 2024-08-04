@@ -1,4 +1,3 @@
-// src/guards/admin.guard.ts
 import { Injectable, CanActivate, ExecutionContext, UnauthorizedException } from '@nestjs/common';
 import { AdminService } from '../admin/admin.service';
 
