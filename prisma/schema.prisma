@@ -33,10 +33,16 @@ model Blog {
   updatedAt   DateTime @updatedAt
 }
 
-model Admin {
+enum Role {
+  ADMIN
+  USER
+}
+
+model User {
   id       Int    @id @default(autoincrement())
-  username String @unique
+  email    String @unique
   password String
+  role     Role   @default(USER)
 }
 
 model Showcase {

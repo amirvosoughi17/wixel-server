@@ -1,7 +1,17 @@
-import { Controller, Post, Body, Get, UseGuards, Req , Param , Delete } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  UseGuards,
+  Req,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './dto/create-order.dto';
-import { AdminGuard } from 'src/guard/admin.guard';
+import { Roles } from 'src/decorators/roles.decorator';
+import { RolesGuard } from 'src/guard/roles.guard';
 
 @Controller('orders')
 export class OrdersController {
@@ -13,16 +23,12 @@ export class OrdersController {
   }
 
   @Get()
-  @UseGuards(AdminGuard)
   async findAll(@Req() req) {
     return this.ordersService.getOrders();
   }
 
   @Delete(':id')
-  @UseGuards(AdminGuard)
   async deleteOrder(@Param('id') id: string) {
     return this.ordersService.deleteOrder(Number(id));
   }
-
-
 }
